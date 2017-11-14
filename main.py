@@ -15,6 +15,8 @@ green = (0, 255, 0)
 red = (255, 0, 0)
 blue = (0, 0, 255)
 
+#images
+
 #game loop
 crashed = False
 
@@ -22,7 +24,7 @@ while not crashed:
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            crashed = True
+            crashed = False
 
         print(event)
         
