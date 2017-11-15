@@ -15,8 +15,11 @@ green = (0, 255, 0)
 red = (255, 0, 0)
 blue = (0, 0, 255)
 
-#images
-
+#cards
+drinkImg = pygame.image.load("dinks.png")
+def drink(x,y):
+    gameDisplay.blit(drinkImg,(x,y))
+    
 #game loop
 crashed = False
 
@@ -26,9 +29,11 @@ while not crashed:
         if event.type == pygame.QUIT:
             crashed = False
 
-        print(event)
-        
+    print(event)
+#object update        
     gameDisplay.fill(black)
+    drink(x,y)
+    
     pygame.display.update()
     clock.tick(60)
     
