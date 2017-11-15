@@ -19,7 +19,11 @@ blue = (0, 0, 255)
 drinkImg = pygame.image.load("dinks.png")
 def drink(x,y):
     gameDisplay.blit(drinkImg,(x,y))
-
+    
+cupImg = pygame.image.load("cup.png")
+def cup(x_c,y_c):
+    gameDisplay.blit(cupImg,(x_c,y_c))
+    
 #positions    
 x = (display_width * 0.15)
 y = (display_height * 0.001)
