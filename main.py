@@ -19,6 +19,16 @@ blue = (0, 0, 255)
 drinkImg = pygame.image.load("dinks.png")
 def drink(x,y):
     gameDisplay.blit(drinkImg,(x,y))
+
+#positions    
+x = (display_width * 0.15)
+y = (display_height * 0.001)
+
+x_c = (x + (d_w /(random.randint(2, 4))))
+y_c = (x + 5)
+
+x_d = (x + (d_w /(random.randint(2, 4))))
+y_d = (x + 70)
     
 #game loop
 crashed = False
