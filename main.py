@@ -19,6 +19,8 @@ blue = (0, 0, 255)
 drinkImg = pygame.image.load("dinks.png")
 def drink(x,y):
     gameDisplay.blit(drinkImg,(x,y))
+     if pygame.mouse.get_pressed(button1, button2, button3):
+        gameDisplay.fill(green)
     
 cupImg = pygame.image.load("cup.png")
 def cup(x_c,y_c):
