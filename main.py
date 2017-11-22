@@ -39,15 +39,25 @@ y_c = (x + 5)
 x_d = (x + (d_w /(random.randint(2, 4))))
 y_d = (x + 70)
 
+drinkImg_rect = drinkImg.get_rect()
+drinkImg_rect.x = x_d
+drinkImg_rect.y = y_d
+
+cupImg_rect = cupImg.get_rect()
+cupImg_rect.x = x_c
+cupImg_rect.y = y_c
+
+pygame.display.update()
 #game loop
 crashed = False
 
 while not crashed:
      pos = pygame.mouse.get_pos()
     pressed1, pressed2, pressed3 = pygame.mouse.get_pressed()
-    # Check if the rect collided with the mouse pos
-    # and if the left mouse button was pressed.
-    if Rectplace.collidepoint(pos) and pressed1:
+  
+   if drinkImg_rect.collidepoint(pos) and pressed1:    # Check if the rect collided with the mouse pos
+        print("You have opened a chest!")
+    if cupImg_rect.collidepoint(pos) and pressed1:   # and if the left mouse button was pressed.
         print("You have opened a chest!")
         
     for event in pygame.event.get():
