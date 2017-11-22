@@ -1,4 +1,7 @@
 import pygame
+import random
+import sys
+import time
 #display setup
 
 display_width = 600
@@ -16,7 +19,7 @@ red = (255, 0, 0)
 blue = (0, 0, 255)
 
 #cards
-drinkImg = pygame.image.load("dinks.png")
+drinkImg = pygame.image.load("drinks.png")
 def drink(x,y):
     gameDisplay.blit(drinkImg,(x,y))
      if pygame.mouse.get_pressed(button1, button2, button3):
@@ -35,7 +38,7 @@ y_c = (x + 5)
 
 x_d = (x + (d_w /(random.randint(2, 4))))
 y_d = (x + 70)
-    
+
 #game loop
 crashed = False
 
