@@ -40,7 +40,13 @@ y_d = (x + 70)
 crashed = False
 
 while not crashed:
-    
+     pos = pygame.mouse.get_pos()
+    pressed1, pressed2, pressed3 = pygame.mouse.get_pressed()
+    # Check if the rect collided with the mouse pos
+    # and if the left mouse button was pressed.
+    if Rectplace.collidepoint(pos) and pressed1:
+        print("You have opened a chest!")
+        
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             crashed = False
