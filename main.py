@@ -48,6 +48,30 @@ cupImg_rect.x = x_c
 cupImg_rect.y = y_c
 
 pygame.display.update()
+
+#pair recognition
+def pair_recognition():
+    if drinkImg_rect.collidepoint(pos) and pressed1:
+        print(second_press())
+    elif cupImg_rect.collidepoint(pos) and pressed1:
+        print(second_press_2())
+    else:
+        ("error")
+def second_press():
+    if drinkImg_rect.collidepoint(pos) and pressed1:
+        print("point")
+    elif cupImg_rect.collidepoint(pos) and pressed1:
+        print("no_point")
+    else:
+        print("error")
+def second_press_2():
+    if drinkImg_rect.collidepoint(pos) and pressed1:
+        print("no_point")
+    elif cupImg_rect.collidepoint(pos) and pressed1:
+        print("point")
+    else:
+        print("error")
+
 #game loop
 crashed = False
 
