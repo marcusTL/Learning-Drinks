@@ -52,15 +52,27 @@ def cup(rand_x,rand_y):
     cupImg_rect.y = rand_y
     gameDisplay.blit(cupImg,cupImg_rect)
 
+def cup_1(rand_x,rand_y):
+    global cupImg_rect
+    cupImg_rect.x = rand_x
+    cupImg_rect.y = rand_y
+    gameDisplay.blit(cupImg,cupImg_rect)
+
 def drink(rand_x,rand_y):
     global drinkImg_rect
     drinkImg_rect.x = rand_x
     drinkImg_rect.y = rand_y
-    gameDisplay.blit(drinkImg,(rand_x,rand_y))
+    gameDisplay.blit(drinkImg,drinkImg_rect)
+
+def drink_1(rand_x,rand_y):
+    global drinkImg_rect
+    drinkImg_rect.x = rand_x
+    drinkImg_rect.y = rand_y
+    gameDisplay.blit(drinkImg,drinkImg_rect)
 
 #test area
 def second_press():
-    if drinkImg_rect.collidepoint(pos) and pressed1:
+    if drinkImg_rect.collidepoint(pos) and pos:
         print("point")
     elif cupImg_rect.collidepoint(pos) and pressed1:
         print("no_point")
@@ -80,8 +92,12 @@ running = True
 
 cup_x = getRandomX()
 cup_y = getRandomY()
+cup_1_x = getRandomX()
+cup_1_y = getRandomY()
 drink_x = getRandomX()
 drink_y = getRandomY()
+drink_1_x = getRandomX()
+drink_1_y = getRandomY()
 
 while running:
     
@@ -103,7 +119,7 @@ while running:
             print("pressed mouse")
             print("mousePos: ",event.pos,"\nRect: ",drinkImg_rect)
             if drinkImg_rect.collidepoint(event.pos):
-                print("point")
+                print(second_press())
     #print(event)
 
     
@@ -111,8 +127,9 @@ while running:
     gameDisplay.fill(white)
 
     cup(cup_x,cup_y)
+    cup_1(cup_1_x,cup_1_y)
     drink(drink_x,drink_y)
-    
+    drink_1(drink_1_x,drink_1_y)
     
     pygame.display.update()
     clock.tick(60)
