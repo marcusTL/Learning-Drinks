@@ -1,14 +1,12 @@
-import pygame
-import random
-import sys
-import time
+import pygame, random, time, sys
+from pygame.locals import *
 #display setup
 
-display_width = 600
-display_height = 500
+display_width = d_w = 600 
+display_height = d_h = 500
 
 gameDisplay = pygame.display.set_mode((display_width, display_height))
-pygame.display.set_caption('Open the dungeon') 
+pygame.display.set_caption('Memory Game') 
 clock = pygame.time.Clock()
 
 #colors
@@ -18,45 +16,49 @@ green = (0, 255, 0)
 red = (255, 0, 0)
 blue = (0, 0, 255)
 
+#grid
+pos_1 = d_w * 0.75
+pos_2 = d_w * 0.5
+pos_3 = d_w * 0.25
+
+pos_4 = d_h * 0.66
+pos_5 = d_h * 0.33
+
+
+pos_x = [pos_1,pos_2,pos_3]
+pos_y = [pos_4,pos_5]
+
+def getRandomX():
+    rand_x = pos_x[random.randrange(len(pos_x))]
+    return(rand_x)
+    pygame.display.update()
+
+def getRandomY():
+    rand_y = pos_y[random.randrange(len(pos_y))]
+    return(rand_y)
+    pygame.display.update()
+
+
 #cards
-drinkImg = pygame.image.load("drinks.png")
-def drink(x,y):
-    gameDisplay.blit(drinkImg,(x,y))
-     if pygame.mouse.get_pressed(button1, button2, button3):
-        gameDisplay.fill(green)
-    
-cupImg = pygame.image.load("cup.png")
-def cup(x_c,y_c):
-    gameDisplay.blit(cupImg,(x_c,y_c))
-    
-#positions    
-x = (display_width * 0.15)
-y = (display_height * 0.001)
-
-x_c = (x + (d_w /(random.randint(2, 4))))
-y_c = (x + 5)
-
-x_d = (x + (d_w /(random.randint(2, 4))))
-y_d = (x + 70)
-
-drinkImg_rect = drinkImg.get_rect()
-drinkImg_rect.x = x_d
-drinkImg_rect.y = y_d
-
+cupImg = pygame.image.load("cup.png").convert_alpha()
+drinkImg = pygame.image.load("drink.png").convert_alpha()
 cupImg_rect = cupImg.get_rect()
-cupImg_rect.x = x_c
-cupImg_rect.y = y_c
+drinkImg_rect = drinkImg.get_rect()
 
-pygame.display.update()
 
-#pair recognition
-def pair_recognition():
-    if drinkImg_rect.collidepoint(pos) and pressed1:
-        print(second_press())
-    elif cupImg_rect.collidepoint(pos) and pressed1:
-        print(second_press_2())
-    else:
-        ("error")
+def cup(rand_x,rand_y):
+    global cupImg_rect
+    cupImg_rect.x = rand_x
+    cupImg_rect.y = rand_y
+    gameDisplay.blit(cupImg,cupImg_rect)
+
+def drink(rand_x,rand_y):
+    global drinkImg_rect
+    drinkImg_rect.x = rand_x
+    drinkImg_rect.y = rand_y
+    gameDisplay.blit(drinkImg,(rand_x,rand_y))
+
+#test area
 def second_press():
     if drinkImg_rect.collidepoint(pos) and pressed1:
         print("point")
@@ -64,6 +66,7 @@ def second_press():
         print("no_point")
     else:
         print("error")
+        
 def second_press_2():
     if drinkImg_rect.collidepoint(pos) and pressed1:
         print("no_point")
@@ -71,30 +74,48 @@ def second_press_2():
         print("point")
     else:
         print("error")
-
+    
 #game loop
-crashed = False
+running = True
 
-while not crashed:
-     pos = pygame.mouse.get_pos()
-    pressed1, pressed2, pressed3 = pygame.mouse.get_pressed()
-  
-   if drinkImg_rect.collidepoint(pos) and pressed1:    # Check if the rect collided with the mouse pos
-        print("You have opened a chest!")
-    if cupImg_rect.collidepoint(pos) and pressed1:   # and if the left mouse button was pressed.
-        print("You have opened a chest!")
+cup_x = getRandomX()
+cup_y = getRandomY()
+drink_x = getRandomX()
+drink_y = getRandomY()
+
+while running:
+    
+    pos = pygame.mouse.get_pos()
+    #pressed1 = pygame.mouse.get_pressed()
+    #print("pos: {0}\nPressed: {1}",pos,pressed1)
+    #if drinkImg_rect.collidepoint(pos) and pressed1[0]:
+    #    print("point")
+    #elif cupImg_rect.collidepoint(pos) and pressed1:
+    #    print("point")
+    
         
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            crashed = False
+            running = False
+        elif event.type == pygame.KEYDOWN and event.key == K_ESCAPE:
+            running = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            print("pressed mouse")
+            print("mousePos: ",event.pos,"\nRect: ",drinkImg_rect)
+            if drinkImg_rect.collidepoint(event.pos):
+                print("point")
+    #print(event)
 
-    print(event)
-#object update        
-    gameDisplay.fill(black)
-    drink(x,y)
+    
+        
+    gameDisplay.fill(white)
+
+    cup(cup_x,cup_y)
+    drink(drink_x,drink_y)
+    
     
     pygame.display.update()
     clock.tick(60)
     
 pygame.quit()
-quit()
+exit()
